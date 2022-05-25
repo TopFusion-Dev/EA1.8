@@ -10,7 +10,7 @@ app.use(cors({
 app.use(express.text());
 app.use(express.json());
 
-const port = 9000
+const port = 8080
 let ws = null;
 
 app.use(function (req, res, next) {
@@ -50,4 +50,6 @@ app.ws('/', function (socket, req) {
     });
 });
 
-app.listen(port);
+app.listen(port,()=>{
+    console.log(`run on port: ${port}`)
+});

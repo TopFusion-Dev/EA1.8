@@ -6,13 +6,12 @@
   "dependencies": {
     "cors": "^2.8.5",
     "express": "^4.18.1",
-    "express-ws": "^5.0.2",
-    "ws": "^8.6.0"
+    "express-ws": "^5.0.2"
   },
   "devDependencies": {},
   "scripts": {
     "dev": "nodemon run dev",
-    "start": "nodemon run dev",
+    "start": "node ./src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

@@ -8,10 +8,12 @@
     "express": "^4.18.1",
     "express-ws": "^5.0.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  },
   "scripts": {
     "dev": "nodemon run dev",
-    "start": "node ./src/index.js",
+    "start": "nodemon run devs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

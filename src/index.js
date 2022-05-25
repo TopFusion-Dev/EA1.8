@@ -10,7 +10,7 @@ app.use(cors({
 app.use(express.text());
 app.use(express.json());
 
-const port = 80
+const port = 9000
 let ws = null;
 
 app.use(function (req, res, next) {

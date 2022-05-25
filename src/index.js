@@ -50,5 +50,4 @@ app.ws('/', function (socket, req) {
     });
 });
 
-
 app.listen(port);

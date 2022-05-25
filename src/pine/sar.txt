@@ -1,0 +1,56 @@
+//Created By ChrisMoody on 7/25/2014
+//Simply Enhances Default Parabolic SAR by creating Two Color Options, One for UpTrend, Other for DownTrend
+//Ability To Turn On/Off The Up Trending Parabolic SAR, And The Down Trending Parabolic SAR
+//@version=5
+strategy(title="CM_Parabolic SAR v1.0 By [TopFusionDev]", shorttitle="CM_P-SAR", overlay=true,pyramiding=2, initial_capital=800, currency=currency.USD)
+start = input.float(2, minval=0, maxval=10, title="Start - Default = 2 - Multiplied by .01")
+increment = input.float(2, minval=0, maxval=10, title="Step Setting (Sensitivity) - Default = 2 - Multiplied by .01" )
+maximum = input.float(2, minval=1, maxval=10, title="Maximum Step (Sensitivity) - Default = 2 - Multiplied by .10")
+sus = input.bool(true, "Show Up Trending Parabolic Sar")
+sds = input.bool(true, "Show Down Trending Parabolic Sar")
+disc = input.bool(false, title="Start and Step settings are *.01 so 2 = .02 etc, Maximum Step is *.10 so 2 = .2")
+//"------Step Setting Definition------"
+//"A higher step moves SAR closer to the price action, which makes a reversal more likely."
+//"The indicator will reverse too often if the step is set too high."
+
+//"------Maximum Step Definition-----")
+//"The sensitivity of the indicator can also be adjusted using the Maximum Step."
+//"While the Maximum Step can influence sensitivity, the Step carries more weight"
+//"because it sets the incremental rate-of-increase as the trend develops"
+
+
+target_trade_size = input.float(800, title='Targe - Trade size:')
+
+startCalc = start * .01
+incrementCalc = increment * .01
+maximumCalc = maximum * .10
+
+sarUp = ta.sar(startCalc, incrementCalc, maximumCalc)
+sarDown = ta.sar(startCalc, incrementCalc, maximumCalc)
+
+dir = sarUp < close ? 1 : -1
+// dirD = sarDown > open ? 1 : -1
+
+colUp = close >= sarDown ? color.new(color.lime, 0) : na
+colDown = close <= sarUp ?  color.new(color.red, 0) : na
+
+plot(sus and sarUp ? sarUp : na, title="Up Trending SAR", style=plot.style_circles, linewidth=4,color=colUp)
+plot(sds and sarDown ? sarDown : na, title="Up Trending SAR", style=plot.style_circles, linewidth=4,color=colDown)
+
+
+buy_signal = dir == 1 and dir[1] == -1
+sell_signal = dir == -1 and dir[1] == +1
+
+plotshape(buy_signal, "Plot_labelup",  shape.labelup, location.belowbar, color=color.new(color.green,10) , text="Buy", size=size.huge)
+plotshape(sell_signal, "Plot_labelDown",  shape.labeldown, location.abovebar, color=color.new(color.blue, 50), text="Sell", size=size.huge)
+// plot(psar, style=plot.style_cross, linewidth=1, color=color.orange)
+// alertcondition(buy_signal, title="Buy [PSAR]", message="Buy [PSAR]")
+
+bouBeforOrder =  buy_signal
+closeConditionBuy = (true) or sell_signal
+closeConditionSell = (low < low[5]) or buy_signal
+
+strategy.entry('buy', strategy.long, qty=target_trade_size, comment='buy', when=buy_signal)
+strategy.close('buy', when=closeConditionBuy)
+strategy.entry('sell', strategy.short, qty=target_trade_size, comment='sell', when=sell_signal)
+strategy.close('sell', when=closeConditionSell)

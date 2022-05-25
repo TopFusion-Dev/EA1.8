@@ -1,0 +1,19 @@
+{
+  "name": "nodejs-botserver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "express-ws": "^5.0.2",
+    "ws": "^8.6.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "dev": "nodemon run dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}

@@ -1,0 +1,14 @@
+let test = {
+    "id": "{{strategy.order.id}}",
+    "awesomeVersion": "A1.6",
+    "actionOrder": "{{strategy.order.action}} ",
+    "forexName": "{{ticker}}",
+    "comment": "{{strategy.order.comment}}",
+    "plotStatus": "{{plot_0}}",
+    "positionSize": "{{strategy.position_size}}",
+    "prevMarket": "{{strategy.prev_market_position}}",
+    "market": "{{strategy.market_position}}",
+    "strategyData": "{{strategy}}"
+}
+
+

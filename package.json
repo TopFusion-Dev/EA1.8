@@ -13,7 +13,7 @@
   },
   "scripts": {
     "dev": "nodemon run dev",
-    "start": "nodemon run devs",
+    "start": "nodemon run dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
